@@ -13,15 +13,11 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 
-public class Tax {
+public class Tax extends Budget{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private double amount;
+    private String fiscalYear;
 
-    private LocalDate date;
+    private TaxType taxType;
 
-    private String description;
 }

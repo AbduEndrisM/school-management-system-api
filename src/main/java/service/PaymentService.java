@@ -3,13 +3,15 @@ package service;
 import dao.DonationDao;
 import dao.OtherIncomeDao;
 import dao.PaymentDao;
-import dao.StudentDao;
+import dao.StudentFeeDao;
+import domain.Donation;
 import domain.OtherIncome;
-import domain.Student;
+import domain.StudentFee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -19,37 +21,64 @@ public class PaymentService {
     PaymentDao paymentDao;
 
     @Autowired
-    StudentDao studentDao;
+    StudentFeeDao studentDao;
 
     @Autowired
     DonationDao donationDao;
     @Autowired
     OtherIncomeDao otherIncomeDao;
 
-    public Student getStudent(Long id){
-        return studentDao.findById(id).get();
+
+    public String studentPayment(StudentFee studentFee) {
+        try {
+            studentDao.save(studentFee);
+        } catch (Exception e) {
+            return "Error in saving" + e.getMessage();
+        }
+
+        return "successfully saved";
     }
 
-    public void studentPaymentIncome(Student student){
+    public double allStudentPayments() {
 
-    }
-
-    public void donationIncome(Student student){
-
-    }
-
-    public void otherPaymentIncome(OtherIncome otherIncome){
-
+        List<StudentFee> studentFeeList = studentDao.findAll();
+        double totalfee = studentFeeList.stream()
+                                        .mapToDouble(f -> f.getAmount())
+                                        .sum();
+        return totalfee;
     }
 
 
+    public String donationPayment(Donation donation) {
+
+        try {
+            donationDao.save(donation);
+        } catch (Exception e) {
+            return "Error in saving" + e.getMessage();
+        }
+
+        return "successfully saved";
+    }
+
+    public List<Donation> allDonations() {
+        return donationDao.findAll();
+    }
 
 
+    public String otherPayment(OtherIncome otherIncome) {
 
+        try {
+            otherIncomeDao.save(otherIncome);
+        } catch (Exception e) {
+            return "Error in saving" + e.getMessage();
+        }
 
+        return "successfully saved";
+    }
 
-
-
+    public List<OtherIncome> allOtherIncomes() {
+        return otherIncomeDao.findAll();
+    }
 
 
 }

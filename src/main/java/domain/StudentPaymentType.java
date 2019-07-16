@@ -1,5 +1,5 @@
 package domain;
 
-public enum PaymentType {
+public enum StudentPaymentType {
     TUITION, EXAM, PENALITY
 }

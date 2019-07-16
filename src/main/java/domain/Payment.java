@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Data
 @NoArgsConstructor
-public  class Payment {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public  abstract   class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     private double amount;
 
@@ -23,14 +23,7 @@ public  class Payment {
     private String description;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Student student;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Donation donation;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private OtherIncome otherIncome;
 
 
 

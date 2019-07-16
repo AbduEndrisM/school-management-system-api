@@ -13,15 +13,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 
-public class OtherCost {
+public class OtherCost extends Budget{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String month;
 
-    private double amount;
-
-    private LocalDate date;
-
-    private String description;
 }

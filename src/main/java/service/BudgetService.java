@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -20,30 +21,68 @@ public class BudgetService {
     private TaxDao taxDao;
 
     @Autowired
-    private OtherCost otherCost;
-
-    @Autowired
-    private StaffDao staffDao;
+    private OtherCostDao otherCostDao;
 
 
-    public Staff getStaff(Long id) {
-        return staffDao.findById(id).get();
+    public String paySalary(Salary salary) {
+        try {
+            salaryDao.save(salary);
+        } catch (Exception e) {
+            return "Error in paying" + e.getMessage();
+        }
+
+        return "successfully Payed";
     }
 
-    public void paySalary(Staff staff) {
+    public String payBonus(Bonus bonus) {
 
+        try {
+            bonusDao.save(bonus);
+        } catch (Exception e) {
+            return "Error in saving" + e.getMessage();
+        }
+
+        return "successfully saved";
     }
 
-    public void payBonus(Staff staff) {
 
+    public String payTax(Tax tax) {
+        try {
+            taxDao.save(tax);
+        } catch (Exception e) {
+            return "Error in saving" + e.getMessage();
+        }
+
+        return "successfully saved";
     }
 
-    public void payTax(Tax tax) {
 
+
+    public String payOther(OtherCost otherCost) {
+
+        try{
+            otherCostDao.save(otherCost);
+        }
+        catch (Exception e){
+            return "Error in saving"+ e.getMessage();
+        }
+
+        return "successfully saved";
     }
 
-    public void payOther(OtherCost otherCost) {
 
+    public List<Salary> allSalaries(){
+        return salaryDao.findAll();
+    }
+
+    public List<Bonus> allBonus(){
+        return bonusDao.findAll();
+    }
+    public List<Tax> allTaxes(){
+        return taxDao.findAll();
+    }
+    public List<OtherCost> allOtherCosts(){
+        return otherCostDao.findAll();
     }
 
 

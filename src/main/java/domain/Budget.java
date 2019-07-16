@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 
-public class Budget {
+public   class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,4 +24,7 @@ public class Budget {
     private LocalDate date;
 
     private String description;
+
+
+
 }

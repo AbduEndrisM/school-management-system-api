@@ -13,15 +13,12 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 
-public class Salary {
+public class Salary extends Budget {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String staffId;
 
-    private double amount;
+    private String department;
 
-    private LocalDate date;
 
-    private String description;
+
 }

@@ -13,15 +13,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 
-public class Bonus {
+public class Bonus extends Budget
+{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private double amount;
-
-    private LocalDate date;
-
-    private String description;
 }
