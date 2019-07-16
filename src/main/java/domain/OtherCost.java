@@ -1,6 +1,5 @@
 package domain;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-public abstract class Income {
+
+public class OtherCost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,10 +24,4 @@ public abstract class Income {
     private LocalDate date;
 
     private String description;
-
-
-
 }
-
-
-
