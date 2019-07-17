@@ -1,4 +1,4 @@
-package domain;
+package com.mum.studentmis.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class OtherIncome extends Payment {
 

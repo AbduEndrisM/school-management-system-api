@@ -1,11 +1,12 @@
-package controller;
+package com.mum.studentmis.controller;
 
-import domain.*;
+import com.mum.studentmis.domain.Donation;
+import com.mum.studentmis.domain.OtherIncome;
+import com.mum.studentmis.domain.Payment;
+import com.mum.studentmis.domain.StudentFee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.PaymentService;
-
-import java.util.List;
+import com.mum.studentmis.service.PaymentService;
 
 
 //Incomes
@@ -26,11 +27,10 @@ public class PaymentController {
     @PostMapping("/payment/donation/{id}")
     public String giveDonation(@PathVariable String id, @RequestBody Donation donation) {
         return paymentService.donationPayment(donation);
-
     }
 
 
-    @GetMapping("/payment/other/{id}")
+    @PostMapping("/payment/other/{id}")
     public String giveOther(@PathVariable String id, @RequestBody OtherIncome otherIncome) {
         return paymentService.otherPayment(otherIncome);
     }
@@ -38,26 +38,27 @@ public class PaymentController {
     ////////////////////////////////
 
     @GetMapping("/payment/student/all") //all payments done as salary
-    public double allStudentFee(@RequestBody StudentFee studentFee) {
+    public double allStudentFee() {
 
         return paymentService.allStudentPayments();
 
     }
 
     @GetMapping("/payment/donation/all") //all payments done as bonus
-    public void allDonation(@RequestBody Donation donation) {
-        paymentService.allDonations();
+    public double allDonation() {
+        return paymentService.allDonations();
     }
 
     @GetMapping("/payment/other/all") //all payments done for tax
-    public void allOtherIncome(@RequestBody OtherIncome otherIncome) {
-        paymentService.allOtherIncomes();
+    public double allOtherIncome(){
+   return    paymentService.allOtherIncomes();
     }
 
 
     @GetMapping("/payment/total")  //current school balance
-    public void totalIncome(@RequestBody Payment payment) {
-
+    public double totalIncome() {
+return paymentService.totalIncome();
     }
+
 
 }

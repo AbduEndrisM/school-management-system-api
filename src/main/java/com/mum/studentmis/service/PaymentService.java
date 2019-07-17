@@ -1,12 +1,12 @@
-package service;
+package com.mum.studentmis.service;
 
-import dao.DonationDao;
-import dao.OtherIncomeDao;
-import dao.PaymentDao;
-import dao.StudentFeeDao;
-import domain.Donation;
-import domain.OtherIncome;
-import domain.StudentFee;
+import com.mum.studentmis.dao.OtherIncomeDao;
+import com.mum.studentmis.dao.DonationDao;
+import com.mum.studentmis.dao.PaymentDao;
+import com.mum.studentmis.dao.StudentFeeDao;
+import com.mum.studentmis.domain.Donation;
+import com.mum.studentmis.domain.OtherIncome;
+import com.mum.studentmis.domain.StudentFee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +60,13 @@ public class PaymentService {
         return "successfully saved";
     }
 
-    public List<Donation> allDonations() {
-        return donationDao.findAll();
+    public double allDonations() {
+        List<Donation> donationList = donationDao.findAll();
+        double totalfee = donationList.stream()
+                .mapToDouble(f -> f.getAmount())
+                .sum();
+
+        return totalfee;
     }
 
 
@@ -76,9 +81,19 @@ public class PaymentService {
         return "successfully saved";
     }
 
-    public List<OtherIncome> allOtherIncomes() {
-        return otherIncomeDao.findAll();
-    }
+    public double allOtherIncomes() {
 
+        List<OtherIncome> otherIncomeList = otherIncomeDao.findAll();
+        double totalfee = otherIncomeList.stream()
+                .mapToDouble(f -> f.getAmount())
+                .sum();
+        return totalfee;
+
+         }
+
+public double totalIncome(){
+        double total=0.0;
+        return allDonations() + allOtherIncomes() + allStudentPayments();
+}
 
 }

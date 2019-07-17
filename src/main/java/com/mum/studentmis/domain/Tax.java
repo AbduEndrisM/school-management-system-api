@@ -1,13 +1,12 @@
-package domain;
+package com.mum.studentmis.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 @Data
@@ -17,7 +16,8 @@ public class Tax extends Budget{
 
 
     private String fiscalYear;
-
+@Column(name = "taxType")
+    @Enumerated(EnumType.STRING)
     private TaxType taxType;
 
 }

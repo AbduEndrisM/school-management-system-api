@@ -1,4 +1,4 @@
-package domain;
+package com.mum.studentmis.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
