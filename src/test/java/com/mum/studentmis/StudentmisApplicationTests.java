@@ -1,4 +1,4 @@
-package com.mum.studentmis.studentmis;
+package com.mum.studentmis;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
