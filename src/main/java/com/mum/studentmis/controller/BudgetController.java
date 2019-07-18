@@ -25,7 +25,7 @@ public class BudgetController {
     }
 
 
-    @PostMapping("/budget/bonus/{id}")
+    @PostMapping("/budget/bonus")
     public String payBonus(@PathVariable String id, @RequestBody Bonus bonus) {
 
 //        System.out.println("Welcome to MUM");
@@ -40,7 +40,7 @@ public class BudgetController {
     }
 
 
-    @PostMapping("/budget/other/{id}")
+    @PostMapping("/budget/other")
     public String payOtherCost(@PathVariable String id, @RequestBody OtherCost otherCost) {
         return budgetService.payOther(otherCost);
     }
@@ -68,7 +68,7 @@ public class BudgetController {
     }
 
 
-    @GetMapping("/budget/total")  //current school balance
+    @GetMapping("/budget/total")  //total cost of the school
     public double totalCost() {
 return budgetService.totalCost();
 
@@ -76,8 +76,20 @@ return budgetService.totalCost();
 
     @GetMapping("/budget/balance")  //current school balance
     public double paySalary() {
-return this.totalCost() -paymentService.totalIncome();
+return  paymentService.totalIncome()-budgetService.totalCost();
 
+    }
+
+
+    @GetMapping("budget/all")
+    public Object[] getAll() {
+
+        Object[] object = new Object[4];
+        object[0] = budgetService.salary();
+        object[1] = budgetService.bonus();
+        object[2] = budgetService.tax();
+        object[3] = budgetService.otherCost();
+        return object;
     }
 
 

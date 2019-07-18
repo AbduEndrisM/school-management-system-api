@@ -1,9 +1,8 @@
 package com.mum.studentmis.controller;
 
-import com.mum.studentmis.domain.Donation;
-import com.mum.studentmis.domain.OtherIncome;
-import com.mum.studentmis.domain.Payment;
-import com.mum.studentmis.domain.StudentFee;
+import com.mum.studentmis.StudentmisApplication;
+import com.mum.studentmis.domain.*;
+import com.mum.studentmis.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.mum.studentmis.service.PaymentService;
@@ -16,6 +15,9 @@ public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private BudgetService budgetService;
 
 
     @PostMapping("/payment/student/{id}")
@@ -37,6 +39,17 @@ public class PaymentController {
 
     ////////////////////////////////
 
+    @GetMapping("/student/pays/{id}") //all payments done by a single student done as salary
+    public Object[] studentPaymentHistory(@PathVariable String id) {
+
+        return paymentService.studentPaymentHistory(id);
+
+    }
+
+
+
+    ///////////
+
     @GetMapping("/payment/student/all") //all payments done as salary
     public double allStudentFee() {
 
@@ -50,15 +63,23 @@ public class PaymentController {
     }
 
     @GetMapping("/payment/other/all") //all payments done for tax
-    public double allOtherIncome(){
-   return    paymentService.allOtherIncomes();
+    public double allOtherIncome() {
+        return paymentService.allOtherIncomes();
     }
 
 
     @GetMapping("/payment/total")  //current school balance
     public double totalIncome() {
-return paymentService.totalIncome();
+        return paymentService.totalIncome();
     }
 
+    @GetMapping("payment/all")
+    public Object[] getAll() {
+        Object object[] = new Object[3];
+        object[0] = paymentService.studentFee();
+        object[1] =paymentService.Donation();
+        object[2] = paymentService.OtherIncome();
+        return object;
+    }
 
 }

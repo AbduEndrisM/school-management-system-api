@@ -115,4 +115,20 @@ public class BudgetService {
     }
 
 
+    public List<Salary> salary() {
+
+return salaryDao.findAll();
+    }
+
+    public List<Bonus> bonus() {
+    return bonusDao.findAll();
+    }
+
+    public List<Tax> tax() {
+    return taxDao.findAll();
+    }
+
+    public List<OtherCost> otherCost() {
+   return otherCostDao.findAll();
+    }
 }

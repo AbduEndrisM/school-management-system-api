@@ -12,11 +12,12 @@ import javax.persistence.Enumerated;
 @Data
 @NoArgsConstructor
 
-public class Tax extends Budget{
+public class Tax extends Budget {
 
 
     private String fiscalYear;
-@Column(name = "taxType")
+
+    @Column(name = "taxType")
     @Enumerated(EnumType.STRING)
     private TaxType taxType;
 

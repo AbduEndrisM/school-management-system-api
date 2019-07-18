@@ -9,6 +9,7 @@ import com.mum.studentmis.domain.OtherIncome;
 import com.mum.studentmis.domain.StudentFee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -43,8 +44,8 @@ public class PaymentService {
 
         List<StudentFee> studentFeeList = studentDao.findAll();
         double totalfee = studentFeeList.stream()
-                                        .mapToDouble(f -> f.getAmount())
-                                        .sum();
+                .mapToDouble(f -> f.getAmount())
+                .sum();
         return totalfee;
     }
 
@@ -89,11 +90,39 @@ public class PaymentService {
                 .sum();
         return totalfee;
 
-         }
+    }
 
-public double totalIncome(){
-        double total=0.0;
-        return allDonations() + allOtherIncomes() + allStudentPayments();
-}
+    public double totalIncome() {
+        double total = allDonations() + allOtherIncomes() + allStudentPayments();
+        return total;
+    }
 
+
+    public List<StudentFee> studentFee() {
+        return studentDao.findAll();
+    }
+
+    public List<Donation> Donation() {
+        return donationDao.findAll();
+    }
+
+    public List<OtherIncome> OtherIncome() {
+        return otherIncomeDao.findAll();
+    }
+
+
+    public Object[] studentPaymentHistory(String studentId) {
+        List<StudentFee> studentFeeList = studentDao.findByStudentId(studentId);
+
+        double totalfee = studentFeeList.stream()
+                .mapToDouble(f -> f.getAmount())
+                .sum();
+
+        Object[] object = new Object[2];
+        object[0]=totalfee;
+        object[1]=studentFeeList;
+        return object;
+
+
+    }
 }
